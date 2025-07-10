@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lic. Víctor Frete - Consultorio Obstétrico</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: radial-gradient(circle at top left, #1a1f2b, #0a0a0a);
+      background-blend-mode: overlay;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #d0d0d0;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 40px 20px;
+    }
+    .main-content {
+      width: 65%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .sidebar {
+      width: 30%;
+      padding: 20px;
+      background: #121826;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    }
+    .logo {
+      width: 180px;
+      height: auto;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 0 5px cyan);
+    }
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      color: #00e5ff;
+      text-align: center;
+    }
+    p.subtitle {
+      margin: 5px 0 30px;
+      font-size: 16px;
+      color: #b0bec5;
+      text-align: center;
+    }
+    .btn {
+      display: block;
+      width: 90%;
+      max-width: 320px;
+      padding: 14px;
+      margin: 12px auto;
+      background-color: #00e5ff;
+      color: #0a0a0a;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+      transition: background 0.3s ease;
+    }
+    .btn:hover {
+      background-color: #1de9b6;
+    }
+    .footer {
+      margin-top: 60px;
+      font-size: 14px;
+      color: #666;
+      text-align: center;
+    }
+    .hidden {
+      display: none;
+    }
+    .info-box {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #1e2a38;
+      border-radius: 10px;
+      color: #e0f7fa;
+      box-shadow: 0 0 10px rgba(0,255,255,0.1);
+    }
+    .gestational-calculator {
+      background-color: #212936;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
+      margin-bottom: 20px;
+    }
+    .gestational-calculator h3 {
+      margin-top: 0;
+      color: #00e5ff;
+    }
+    .gestational-calculator input[type="date"],
+    .gestational-calculator input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      border: 1px solid #00e5ff33;
+      background-color: #121826;
+      color: #fff;
+      font-size: 16px;
+    }
+    .gestational-calculator button {
+      background-color: #00e5ff;
+      color: #0a0a0a;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .gestational-calculator button:hover {
+      background-color: #1de9b6;
+    }
+    .gestational-result {
+      font-weight: bold;
+      color: #00e5ff;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="main-content">
+    <div class="logo" style="font-size: 60px; font-weight: bold; color: #00e5ff; text-shadow: 0 0 15px #00e5ff; font-family: 'Algerian', serif; letter-spacing: 3px; text-align: center; width: 100%;">VF</div>
+    <h1>Lic. Víctor Frete</h1>
+    <p class="subtitle">Atención Obstétrica Integral</p>
+
+    <a class="btn" href="https://calendly.com/victoriofrete" target="_blank">📅 Reservar un turno</a>
+    <a class="btn" href="https://wa.me/5493704303097?text=Hola%20Lic.%20Víctor%2C%20quiero%20hacer%20una%20consulta" target="_blank">💬 Escribirme por WhatsApp</a>
+    <a class="btn" href="#presentacion" onclick="alert('Soy el Licenciado Víctor Frete, especialista en salud obstétrica. Me especializo en acompañarte en cada etapa del embarazo y en tu bienestar reproductivo.')">👨‍⚕️ Ver Presentación</a>
+
+    <select id="consultaTipo" class="btn" onchange="mostrarInformacion()">
+      <option value="">Seleccioná el tipo de consulta</option>
+      <option value="embarazo">Consulta por Control de Embarazo</option>
+      <option value="anticoncepcion">Consulta por Anticoncepción</option>
+    </select>
+
+    <div id="infoEmbarazo" class="info-box hidden">
+      <h3>Control de Embarazo</h3>
+      <p>Incluye controles periódicos, ecografías, estudios de laboratorio, seguimiento nutricional, clases de preparación al parto y acompañamiento continuo.</p>
+    </div>
+
+    <div id="infoAnticoncepcion" class="info-box hidden">
+      <h3>Consulta por Anticoncepción</h3>
+      <p>Incluye consejería personalizada, colocación y extracción de DIU, implantes subdérmicos, asesoramiento sobre métodos anticonceptivos adecuados, y asesoramiento y seguimiento de la Interrupción del embarazo hasta la semana 12.</p>
+    </div>
+
+    <div id="cuadernoBtn" class="btn hidden">
+      📘 Ver Cuaderno de Embarazo
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <div class="gestational-calculator">
+      <h3>📅 Edad Gestacional (FUM)</h3>
+      <input type="date" id="fum">
+      <button onclick="calcularEdadFUM()">Calcular por FUM</button>
+      <p id="resultadoFUM" class="gestational-result"></p>
+    </div>
+
+    <div class="gestational-calculator">
+      <h3>📈 Edad Gestacional (Ecografía)</h3>
+      <input type="date" id="ecoFecha">
+      <input type="number" id="ecoSemanas" placeholder="Semanas">
+      <input type="number" id="ecoDias" placeholder="Días">
+      <button onclick="calcularEdadEcografia()">Calcular por Ecografía</button>
+      <p id="resultadoEco" class="gestational-result"></p>
+    </div>
+  </div>
+
+  <script>
+    function mostrarInformacion() {
+      const tipo = document.getElementById('consultaTipo').value;
+      document.getElementById('infoEmbarazo').classList.add('hidden');
+      document.getElementById('infoAnticoncepcion').classList.add('hidden');
+      if (tipo === 'embarazo') document.getElementById('infoEmbarazo').classList.remove('hidden');
+      if (tipo === 'anticoncepcion') document.getElementById('infoAnticoncepcion').classList.remove('hidden');
+    }
+
+    const pagoConfirmado = false;
+    if (pagoConfirmado) {
+      const btn = document.getElementById('cuadernoBtn');
+      btn.classList.remove('hidden');
+      btn.onclick = function() {
+        window.open('https://drive.google.com/file/d/CUADERNO_ID_AQUI/view', '_blank');
+      };
+    }
+
+    function calcularEdadFUM() {
+      const fum = new Date(document.getElementById('fum').value);
+      const hoy = new Date();
+      const dias = Math.floor((hoy - fum) / (1000 * 60 * 60 * 24));
+      const semanas = Math.floor(dias / 7);
+      const restoDias = dias % 7;
+      document.getElementById('resultadoFUM').textContent = `Edad gestacional: ${semanas} semanas y ${restoDias} días.`;
+    }
+
+    function calcularEdadEcografia() {
+      const ecoFecha = new Date(document.getElementById('ecoFecha').value);
+      const ecoSemanas = parseInt(document.getElementById('ecoSemanas').value);
+      const ecoDias = parseInt(document.getElementById('ecoDias').value);
+      const hoy = new Date();
+      const diasTranscurridos = Math.floor((hoy - ecoFecha) / (1000 * 60 * 60 * 24));
+      const totalDias = (ecoSemanas * 7 + ecoDias) + diasTranscurridos;
+      const semanasFinal = Math.floor(totalDias / 7);
+      const diasFinal = totalDias % 7;
+      document.getElementById('resultadoEco').textContent = `Edad gestacional estimada: ${semanasFinal} semanas y ${diasFinal} días.`;
+    }
+  </script>
+</body>
+</html>
